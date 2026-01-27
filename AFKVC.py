@@ -69,7 +69,7 @@ async def on_message(message):
 
 async def main():
     async with bot:
-        await bot.start('MTM1MDE4NDg0NzU1MjkzODEwNw.GTJJF1.YPDLzdo8sIGGRpWoBMAuzfHng2b-bfk_YWycoM')
+        await bot.start('MTM1MDE4NDg0NzU1MjkzODEwNw.G3BZO7.CGoGSYiHG-kqg119rRmeiyBTZmVAZYvXLyOrAg')
 
 if __name__ == "__main__":
     try:
@@ -79,3 +79,4 @@ if __name__ == "__main__":
     except RuntimeError: 
 
         pass
+
