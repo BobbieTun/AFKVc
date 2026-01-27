@@ -69,7 +69,7 @@ async def on_message(message):
 
 async def main():
     async with bot:
-        await bot.start('MTM1MDE4NDg0NzU1MjkzODEwNw.GRcP8p.s-2OXtt6oxS-wRQAaGsk3q6ZkzYXECXe_Q2a00')
+        await bot.start('MTM1MDE4NDg0NzU1MjkzODEwNw.GTJJF1.YPDLzdo8sIGGRpWoBMAuzfHng2b-bfk_YWycoM')
 
 if __name__ == "__main__":
     try:
@@ -77,4 +77,5 @@ if __name__ == "__main__":
     except KeyboardInterrupt:
         pass
     except RuntimeError: 
+
         pass
