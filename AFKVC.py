@@ -4,8 +4,8 @@ import re
 import asyncio
 import sys
 import os
-
-# 1. FIX QUAN TRỌNG CHO PYTHON 3.13 TRÊN WINDOWS
+from flask import Flask
+from threading import Thread
 if sys.platform == 'win32':
     asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
 
@@ -16,6 +16,18 @@ intents.voice_states = True
 
 bot = commands.Bot(command_prefix="!", intents=intents)
 
+app = Flask('')
+
+@app.route('/')
+def home():
+    return "Bot is alive!"
+
+def run():
+    app.run(host='0.0.0.0', port=8000)
+
+def keep_alive():
+    t = Thread(target=run)
+    t.start()
 @bot.event
 async def on_ready():
     print(f'Bot {bot.user.name} online')
@@ -25,7 +37,7 @@ async def on_message(message):
     if message.author == bot.user:
         return
 
-    # Logic: Tag bot + ID để vào
+    
     if bot.user.mentioned_in(message):
         content = message.content.strip()
         
@@ -70,15 +82,14 @@ async def on_message(message):
 
 async def main():
     async with bot:
+        
         await bot.start(os.environ.get('tokens'))
 
 if __name__ == "__main__":
+    keep_alive()  
     try:
         asyncio.run(main())
     except KeyboardInterrupt:
         pass
     except RuntimeError: 
-
         pass
-
-
