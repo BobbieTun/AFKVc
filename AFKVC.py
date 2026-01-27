@@ -3,6 +3,7 @@ from discord.ext import commands
 import re
 import asyncio
 import sys
+import os
 
 # 1. FIX QUAN TRỌNG CHO PYTHON 3.13 TRÊN WINDOWS
 if sys.platform == 'win32':
@@ -69,7 +70,7 @@ async def on_message(message):
 
 async def main():
     async with bot:
-        await bot.start('MTM1MDE4NDg0NzU1MjkzODEwNw.G3BZO7.CGoGSYiHG-kqg119rRmeiyBTZmVAZYvXLyOrAg')
+        await bot.start(os.environ.get('tokens'))
 
 if __name__ == "__main__":
     try:
@@ -79,4 +80,5 @@ if __name__ == "__main__":
     except RuntimeError: 
 
         pass
+
 
