@@ -1,1 +1,1 @@
-worker: python AFKVC.py
+web:python AFKVC.py
