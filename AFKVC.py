@@ -4,6 +4,9 @@ import re
 import asyncio
 import sys
 import os
+import requests
+import threading
+import time
 from flask import Flask
 from threading import Thread
 if sys.platform == 'win32':
@@ -28,6 +31,11 @@ def run():
 def keep_alive():
     t = Thread(target=run)
     t.start()
+    while True:
+        pass
+    time.sleep(300)
+    threading.Thread(target=keep_alive, daemon = True).start()
+
 @bot.event
 async def on_ready():
     print(f'Bot {bot.user.name} online')
@@ -93,3 +101,4 @@ if __name__ == "__main__":
         pass
     except RuntimeError: 
         pass
+
