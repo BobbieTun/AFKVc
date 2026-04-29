@@ -90,6 +90,15 @@ async def limit(ctx, lim: int):
     except: await ctx.send("thieu quyen manage channels")
 
 @bot.command()
+async def unlimit(ctx):
+    if ctx.author.id != MY_ID: return
+    if not ctx.author.voice: return await ctx.send("ong phai vao voice truoc")
+    try:
+        await ctx.author.voice.channel.edit(user_limit=0)
+        await ctx.send("unlimited")
+    except: await ctx.send("thieu quyen manage channels")
+
+@bot.command()
 async def lock(ctx):
     if ctx.author.id != MY_ID: return
     if not ctx.author.voice: return await ctx.send("ong phai vao voice truoc")
@@ -99,6 +108,18 @@ async def lock(ctx):
         ow.connect = ow.view_channel = False
         await ch.set_permissions(ctx.guild.default_role, overwrite=ow)
         await ctx.send("locked")
+    except: await ctx.send("thieu quyen manage channels/roles")
+
+@bot.command()
+async def unlock(ctx):
+    if ctx.author.id != MY_ID: return
+    if not ctx.author.voice: return await ctx.send("ong phai vao voice truoc")
+    try:
+        ch = ctx.author.voice.channel
+        ow = ch.overwrites_for(ctx.guild.default_role)
+        ow.connect = ow.view_channel = None
+        await ch.set_permissions(ctx.guild.default_role, overwrite=ow)
+        await ctx.send("unlocked")
     except: await ctx.send("thieu quyen manage channels/roles")
 
 @bot.command()
