@@ -82,30 +82,42 @@ async def join(ctx, rid: str):
 
 @bot.command()
 async def limit(ctx, lim: int):
-    if ctx.author.id != MY_ID or not ctx.author.voice: return
-    await ctx.author.voice.channel.edit(user_limit=lim)
-    await ctx.send("done")
+    if ctx.author.id != MY_ID: return
+    if not ctx.author.voice: return await ctx.send("ong phai vao voice truoc")
+    try:
+        await ctx.author.voice.channel.edit(user_limit=lim)
+        await ctx.send("done")
+    except: await ctx.send("thieu quyen manage channels")
 
 @bot.command()
 async def lock(ctx):
-    if ctx.author.id != MY_ID or not ctx.author.voice: return
-    ch = ctx.author.voice.channel
-    ow = ch.overwrites_for(ctx.guild.default_role)
-    ow.connect = ow.view_channel = False
-    await ch.set_permissions(ctx.guild.default_role, overwrite=ow)
-    await ctx.send("locked")
+    if ctx.author.id != MY_ID: return
+    if not ctx.author.voice: return await ctx.send("ong phai vao voice truoc")
+    try:
+        ch = ctx.author.voice.channel
+        ow = ch.overwrites_for(ctx.guild.default_role)
+        ow.connect = ow.view_channel = False
+        await ch.set_permissions(ctx.guild.default_role, overwrite=ow)
+        await ctx.send("locked")
+    except: await ctx.send("thieu quyen manage channels/roles")
 
 @bot.command()
 async def allow(ctx, mem: discord.Member):
-    if ctx.author.id != MY_ID or not ctx.author.voice: return
-    await ctx.author.voice.channel.set_permissions(mem, view_channel=True, connect=True, send_messages=True)
-    await ctx.send("allowed")
+    if ctx.author.id != MY_ID: return
+    if not ctx.author.voice: return await ctx.send("ong phai vao voice truoc")
+    try:
+        await ctx.author.voice.channel.set_permissions(mem, view_channel=True, connect=True, send_messages=True)
+        await ctx.send("allowed")
+    except: await ctx.send("thieu quyen manage channels/roles")
 
 @bot.command()
 async def remove_allow(ctx, mem: discord.Member):
-    if ctx.author.id != MY_ID or not ctx.author.voice: return
-    await ctx.author.voice.channel.set_permissions(mem, overwrite=None)
-    await ctx.send("removed")
+    if ctx.author.id != MY_ID: return
+    if not ctx.author.voice: return await ctx.send("ong phai vao voice truoc")
+    try:
+        await ctx.author.voice.channel.set_permissions(mem, overwrite=None)
+        await ctx.send("removed")
+    except: await ctx.send("thieu quyen manage channels/roles")
 
 if __name__ == "__main__":
     keep_alive()
