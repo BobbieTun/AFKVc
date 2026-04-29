@@ -5,15 +5,12 @@ import asyncio
 import os
 from flask import Flask
 from threading import Thread
-
-# --- CẤU HÌNH HOST ---
 app = Flask('')
 @app.route('/')
 def home(): return "bot onl", 200
 def run_flask(): app.run(host='0.0.0.0', port=8000)
 def keep_alive(): Thread(target=run_flask, daemon=True).start()
 
-# --- SETUP BOT ---
 intents = discord.Intents.default()
 intents.message_content = True
 intents.guilds = True
